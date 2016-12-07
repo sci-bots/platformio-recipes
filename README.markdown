@@ -1,6 +1,6 @@
 Conda recipe to build [`click`][1] package.
 
-**Note** Windows build only.
+**Note** Windows and Linux builds only.
 
 Build
 =====
@@ -17,7 +17,7 @@ Build recipe:
 Install
 =======
 
-The [Windows 32-bit build][2] may be installed from the
+The [Windows 32-bit build or Linux 64-bit build][2] may be installed from the
 [`wheeler-microfluidics`][3] channel using:
 
     conda install -c wheeler-microfluidics click
