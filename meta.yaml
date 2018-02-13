@@ -1,13 +1,20 @@
+{% set VERSION = "5.1.0" %}
 package:
-  name: click
-  version: 5.1.0
+    name: click
+    version: {{ VERSION }}
 
 build:
-  # If this is a new build for the same version, increment the build
-  # number. If you do not include this key, it defaults to 0.
-  number: 0
+    number: 0
+    script: python -m pip install "{{ PKG_NAME }}=={{ VERSION }}"
+    noarch: python
 
 requirements:
-  build:
-    - python
-    - pip
+    build:
+        - python
+        - pip
+    run:
+        - python
+
+test:
+    imports:
+        - click
