@@ -4,3 +4,6 @@
 [submodule "platformio-core"]
 	path = platformio-core
 	url = git@github.com:sci-bots/platformio-recipe.git
+[submodule "platform-atmelavr"]
+	path = platform-atmelavr
+	url = git@github.com:sci-bots/platformio-platform-atmelavr-recipe.git
