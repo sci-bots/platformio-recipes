@@ -1,0 +1,30 @@
+{% set PIO_PKG_NAME = 'platform-teensy' %}
+{% set PKG_TYPE = 'platform' %}
+{% set PKG_NAME = 'platformio-' + PIO_PKG_NAME %}
+{% set REPO = 'https://github.com/platformio/' + PIO_PKG_NAME %}
+{% set VERSION = '3.0.1' %}
+{% set COMMIT = 'v' + VERSION %}
+source:
+  url: {{ REPO }}/archive/{{ COMMIT }}.tar.gz
+
+package:
+  name: {{ PKG_NAME }}
+  version: {{ VERSION }}
+
+build:
+  # If this is a new build for the same version, increment the build
+  # number. If you do not include this key, it defaults to 0.
+  number: 0
+  noarch: true
+  script:
+    python -c
+      "import os.path; import os; import shutil;
+      install_dir = os.path.join(os.environ['PREFIX'], 'share', 'platformio', '{{ PKG_TYPE }}s', '{{ PIO_PKG_NAME }}');
+      shutil.copytree(os.environ['SRC_DIR'], install_dir);
+      os.remove(os.path.join(install_dir, 'bld.bat'));  # [win]
+      os.remove(os.path.join(install_dir, 'build.sh'));  # [not win]
+      "
+
+requirements:
+  build:
+    - python
