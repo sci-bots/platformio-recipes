@@ -1,0 +1,6 @@
+[submodule "tool-scons"]
+	path = tool-scons
+	url = git@github.com:sci-bots/platformio-tool-scons-recipe.git
+[submodule "platformio-core"]
+	path = platformio-core
+	url = git@github.com:sci-bots/platformio-recipe.git
