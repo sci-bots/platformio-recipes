@@ -1,0 +1,41 @@
+{% set PIO_PKG_NAME = 'tool-teensy' %}
+{% set PKG_NAME = 'platformio-' + PIO_PKG_NAME %}
+{% set PKG_TYPE = 'package' %}
+{% set VERSION = '1.21.0' %}
+{% set REPO = 'https://dl.bintray.com/platformio/dl-packages' %}
+package:
+  name: {{ PKG_NAME }}
+  version: {{ VERSION }}
+
+source:
+  url: {{ REPO }}/{{ PIO_PKG_NAME }}-windows-{{ VERSION }}.tar.gz  # [win]
+  url: {{ REPO }}/{{ PIO_PKG_NAME }}-linux_i686-{{ VERSION }}.tar.gz  # [linux32]
+  url: {{ REPO }}/{{ PIO_PKG_NAME }}-linux_x86_64-{{ VERSION }}.tar.gz  # [linux64]
+  url: {{ REPO }}/{{ PIO_PKG_NAME }}-darwin_x86_64-{{ VERSION }}.tar.gz  # [osx]
+
+build:
+  # If this is a new build for the same version, increment the build
+  # number. If you do not include this key, it defaults to 0.
+  number: 0
+  # XXX On Windows, delete `teensy_loader_cli.exe` to force usage of graphical
+  # uploader, which does not require user to press the `Reset` button.
+  #
+  # See [`dropbot.py` issue 19][i19] for more information.
+  #
+  # [i19]: https://gitlab.com/sci-bots/dropbot.py/issues/19
+  script:
+    python -c
+      "import os.path; import os; import shutil;
+      install_dir = os.path.join(os.environ['PREFIX'], 'share', 'platformio', '{{ PKG_TYPE }}s', '{{ PIO_PKG_NAME }}');
+      os.remove(os.path.join(os.environ['SRC_DIR'], 'teensy_loader_cli.exe'));  # [win]
+      shutil.copytree(os.environ['SRC_DIR'], install_dir);
+      os.remove(os.path.join(install_dir, 'bld.bat'));  # [win]
+      os.remove(os.path.join(install_dir, 'build.sh'));  # [not win]
+      "
+
+requirements:
+  build:
+    - python
+
+  run:
+    - platformio-platform-teensy
