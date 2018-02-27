@@ -1,7 +1,7 @@
 {% set PIO_PKG_NAME = 'toolchain-gccarmnoneeabi' %}
 {% set PKG_NAME = 'platformio-' + PIO_PKG_NAME %}
 {% set PKG_TYPE = 'package' %}
-{% set VERSION = '1.60301.0' %}
+{% set VERSION = '1.50401.0' %}
 {% set REPO = 'https://dl.bintray.com/platformio/dl-packages' %}
 package:
   name: {{ PKG_NAME }}
