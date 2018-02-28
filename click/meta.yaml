@@ -1,0 +1,20 @@
+{% set VERSION = "5.1.0" %}
+package:
+    name: click
+    version: {{ VERSION }}
+
+build:
+    number: 0
+    script: python -m pip install "{{ PKG_NAME }}=={{ VERSION }}"
+    noarch: python
+
+requirements:
+    build:
+        - python
+        - pip
+    run:
+        - python
+
+test:
+    imports:
+        - click
