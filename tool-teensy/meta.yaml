@@ -27,7 +27,8 @@ build:
     python -c
       "import os.path; import os; import shutil;
       install_dir = os.path.join(os.environ['PREFIX'], 'share', 'platformio', '{{ PKG_TYPE }}s', '{{ PIO_PKG_NAME }}');
-      os.remove(os.path.join(os.environ['SRC_DIR'], 'teensy_loader_cli.exe'));  # [win]
+      TEENSY_CLI_PATH = os.path.join(os.environ['SRC_DIR'], 'teensy_loader_cli.exe');  # [win]
+      os.remove(TEENSY_CLI_PATH) if os.path.isfile(TEENSY_CLI_PATH) else None;  # [win]
       shutil.copytree(os.environ['SRC_DIR'], install_dir);
       os.remove(os.path.join(install_dir, 'bld.bat'));  # [win]
       os.remove(os.path.join(install_dir, 'build.sh'));  # [not win]
