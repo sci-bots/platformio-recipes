@@ -39,4 +39,4 @@ requirements:
     - python
 
   run:
-    - platformio-platform-teensy
+    - platformio-platform-teensy >=3.0.1
