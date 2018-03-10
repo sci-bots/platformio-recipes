@@ -16,7 +16,7 @@ source:
 build:
   # If this is a new build for the same version, increment the build
   # number. If you do not include this key, it defaults to 0.
-  number: 0
+  number: 1
   # XXX On Windows, delete `teensy_loader_cli.exe` to force usage of graphical
   # uploader, which does not require user to press the `Reset` button.
   #
@@ -24,15 +24,15 @@ build:
   #
   # [i19]: https://gitlab.com/sci-bots/dropbot.py/issues/19
   script:
-    python -c
-      "import os.path; import os; import shutil;
-      install_dir = os.path.join(os.environ['PREFIX'], 'share', 'platformio', '{{ PKG_TYPE }}s', '{{ PIO_PKG_NAME }}');
-      TEENSY_CLI_PATH = os.path.join(os.environ['SRC_DIR'], 'teensy_loader_cli.exe');  # [win]
-      os.remove(TEENSY_CLI_PATH) if os.path.isfile(TEENSY_CLI_PATH) else None;  # [win]
-      shutil.copytree(os.environ['SRC_DIR'], install_dir);
-      os.remove(os.path.join(install_dir, 'bld.bat'));  # [win]
-      os.remove(os.path.join(install_dir, 'build.sh'));  # [not win]
-      "
+    - python -c
+        "import os.path; import os; import shutil;
+        install_dir = os.path.join(os.environ['PREFIX'], 'share', 'platformio', '{{ PKG_TYPE }}s', '{{ PIO_PKG_NAME }}');
+        TEENSY_CLI_PATH = os.path.join(os.environ['SRC_DIR'], 'teensy_loader_cli.exe');  # [win]
+        os.remove(TEENSY_CLI_PATH) if os.path.isfile(TEENSY_CLI_PATH) else None;  # [win]
+        shutil.copytree(os.environ['SRC_DIR'], install_dir);
+        os.remove(os.path.join(install_dir, 'bld.bat'));  # [win]
+        os.remove(os.path.join(install_dir, 'build.sh'));  # [not win]
+        "
 
 requirements:
   build:
